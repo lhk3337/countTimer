@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  const [number, setNumber] = useState();
+  const [timer, setTimer] = useState();
+  const [start, setStart] = useState(true);
+  const onClickBtn = (number) => {
+    const interval = setInterval(() => {
+      setTimer(number--);
+
+      if (number < 0) {
+        clearInterval(interval);
+        console.log("Ding!");
+        setStart(true);
+      }
+    }, 1000);
+    setStart(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <h1>Timer</h1>
+      <input type="number" onChange={(e) => setNumber(e.target.value)} />
+      {start ? (
+        <button
+          onClick={() => {
+            onClickBtn(number);
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Start
+        </button>
+      ) : (
+        <>
+          <button>stop</button>
+          <button>resume</button>
+        </>
+      )}
+      <div>{timer}</div>
+    </>
   );
 }
 
