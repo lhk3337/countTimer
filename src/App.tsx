@@ -5,10 +5,12 @@ import Layout from "./components/layout";
 import Clock from "./components/clock";
 import theme from "./styles/theme";
 import GlobalStyle from "./styles/Global";
+import Seo from "./components/seo";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Seo />
       <GlobalStyle />
       <Layout>
         <Clock />
