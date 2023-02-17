@@ -1,6 +1,6 @@
 import React from "react";
 interface Props {
-  [key: string]: any;
+  [key: string]: string;
 }
 const SvgPause = (props: Props) => {
   return (
