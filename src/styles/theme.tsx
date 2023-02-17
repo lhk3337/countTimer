@@ -1,14 +1,8 @@
 const color = {
-  background: "#004369",
-  text: {
-    mainColor: "#E5DDC8",
-    black: "#271B31",
-  },
-  button: {
-    red: "#DB1F48",
-    blue: "#004369",
-  },
-  bar: "#DB1F48",
+  primaryColor: "#004369",
+  secondaryColor: "#E5DDC8",
+  thirdColor: "#DB1F48",
+  hoverColor: "#bdb5a4",
 };
 
 const size = {

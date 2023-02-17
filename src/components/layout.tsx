@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
-const Layout = ({ children }: any) => {
+interface Props {
+  children: React.ReactNode;
+}
+const Layout = ({ children }: Props) => {
   return (
     <Container>
       <Title>Timer</Title>
@@ -16,11 +18,11 @@ const Container = styled.main`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  ${({ theme }) => theme.size.max.wlg};
+  ${({ theme }) => theme.size.max.wsm};
   padding: ${({ theme }) => theme.spacing.size.space9};
   margin-top: ${({ theme }) => theme.spacing.size.space40};
-  background-color: ${({ theme }) => theme.color.background};
-  color: ${({ theme }) => theme.color.text.mainColor};
+  background-color: ${({ theme }) => theme.color.primaryColor};
+  color: ${({ theme }) => theme.color.secondaryColor};
   border-radius: ${({ theme }) => theme.size.radiusSize.roundedXl};
 `;
 const Title = styled.h1`
