@@ -9,8 +9,28 @@ import SvgUp from "../assets/svgUp";
 import SvgDown from "../assets/svgDown";
 
 const Timer = () => {
-  const [isPlay, setIsPlay] = useState(true);
+  const [isPlay, setIsPlay] = useState<boolean>(true);
   const [isStart, setIsStart] = useState<boolean>(true);
+  const [timeNumber, setTimeNumber] = useState(1);
+  const min = 1;
+  const max = 60;
+  const incNumber = () => {
+    if (timeNumber < max) {
+      setTimeNumber(timeNumber + 1);
+    }
+  };
+  const decNumber = () => {
+    if (timeNumber > min) {
+      setTimeNumber(timeNumber - 1);
+    }
+  };
+
+  const handleCount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value)) {
+      setTimeNumber(Math.min(Math.max(value, min), max));
+    }
+  };
 
   return (
     <>
@@ -23,16 +43,20 @@ const Timer = () => {
                   e.target.value = e.target.value.slice(0, e.target.maxLength);
               }}
               type="number"
+              value={timeNumber}
+              min={1}
+              max={60}
               maxLength={2}
               onKeyDown={(e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()}
+              onChange={handleCount}
             />
             <span>minutes</span>
           </InputTimer>
           <ControlTimer>
-            <ControllBtn>
+            <ControllBtn onClick={incNumber}>
               <SvgUp stroke={theme.color.secondaryColor} width={40} height={40} strokeWidth={3.0} />
             </ControllBtn>
-            <ControllBtn>
+            <ControllBtn onClick={decNumber}>
               <SvgDown stroke={theme.color.secondaryColor} width={40} height={40} strokeWidth={3.0} />
             </ControllBtn>
           </ControlTimer>
@@ -49,6 +73,7 @@ const Timer = () => {
             <Button
               isStart={isStart}
               setIsStart={setIsStart}
+              setTimeNumber={setTimeNumber}
               text={<SvgStop fill={theme.color.thirdColor} width="40" height="40" />}
             />
             {isPlay ? (
@@ -119,9 +144,9 @@ const ControlTimer = styled.div`
   position: absolute;
   flex-direction: column;
   justify-content: space-between;
-  right: -84px;
-  top: 16px;
-  height: 10rem;
+  right: -5rem;
+  top: 2.4rem;
+  height: 12rem;
 `;
 
 const ControllBtn = styled.button`

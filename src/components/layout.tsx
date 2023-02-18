@@ -20,7 +20,7 @@ const Container = styled.main`
   align-items: center;
   ${({ theme }) => theme.size.max.wsm};
   padding: ${({ theme }) => theme.spacing.size.space9};
-  margin-top: ${({ theme }) => theme.spacing.size.space40};
+  margin-top: 12%;
   background-color: ${({ theme }) => theme.color.primaryColor};
   color: ${({ theme }) => theme.color.secondaryColor};
   border-radius: ${({ theme }) => theme.size.radiusSize.roundedXl};

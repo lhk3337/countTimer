@@ -4,19 +4,23 @@ import styled from "styled-components";
 interface Props {
   text: any;
   isStart?: boolean;
+  setTimeNumber?: React.Dispatch<React.SetStateAction<number>>;
   setIsStart?: React.Dispatch<React.SetStateAction<boolean>>;
   setIsPlay?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface Styled {
   [key: string]: any;
-  start: boolean;
+  isStart: boolean;
 }
-const Button = ({ setIsStart, text, isStart, setIsPlay }: Props) => {
+const Button = ({ setIsStart, text, isStart, setIsPlay, setTimeNumber }: Props) => {
   const onClick = () => {
     if (setIsStart) {
       setIsStart((prev) => !prev);
     } else if (setIsPlay) {
       setIsPlay((prev) => !prev);
+    }
+    if (setTimeNumber) {
+      setTimeNumber(1);
     }
   };
   return (
