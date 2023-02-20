@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Button from "./button";
+
 import SvgStop from "../assets/svgStop";
 import theme from "../styles/theme";
 import SvgPause from "../assets/svgPause";
@@ -8,29 +8,78 @@ import SvgPlay from "../assets/svgPlay";
 import SvgUp from "../assets/svgUp";
 import SvgDown from "../assets/svgDown";
 
+interface Styled {
+  [key: string]: any;
+}
 const Timer = () => {
   const [isPlay, setIsPlay] = useState<boolean>(true);
   const [isStart, setIsStart] = useState<boolean>(true);
-  const [timeNumber, setTimeNumber] = useState(1);
+  const [timeNumber, setTimeNumber] = useState(60);
+  const [initialCount, setInitialCount] = useState(1);
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+
   const min = 1;
   const max = 60;
   const incNumber = () => {
-    if (timeNumber < max) {
-      setTimeNumber(timeNumber + 1);
+    if (initialCount < max) {
+      setInitialCount(initialCount + 1);
+      setTimeNumber((initialCount + 1) * 60);
     }
   };
   const decNumber = () => {
-    if (timeNumber > min) {
-      setTimeNumber(timeNumber - 1);
+    if (initialCount > min) {
+      setInitialCount(initialCount - 1);
+      setTimeNumber((initialCount - 1) * 60);
     }
   };
 
   const handleCount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     if (!isNaN(value)) {
-      setTimeNumber(Math.min(Math.max(value, min), max));
+      setTimeNumber(value * 60);
+      setInitialCount(Math.min(Math.max(value, min), max));
     }
   };
+
+  const countStart = () => {
+    setIsStart(false);
+    setTimer(
+      setInterval(() => {
+        setTimeNumber((timeNumber) => timeNumber - 1);
+      }, 1000)
+    );
+  };
+  const countReset = () => {
+    setTimeNumber(initialCount * 60);
+    setTimer(null);
+    clearInterval(timer!);
+    setIsStart(true);
+    setIsPlay(true);
+  };
+
+  const countPause = () => {
+    clearInterval(timer!);
+    setTimer(null);
+    setIsPlay((prev) => !prev);
+  };
+
+  const countResume = () => {
+    setTimer(
+      setInterval(() => {
+        setTimeNumber((timeNumber) => timeNumber - 1);
+      }, 1000)
+    );
+    setIsPlay((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (timeNumber === 0) {
+      clearInterval(timer!);
+      setIsStart(true);
+      setIsPlay(true);
+      setTimeNumber(initialCount * 60);
+    }
+  }, [initialCount, timeNumber, timer]);
 
   return (
     <>
@@ -43,7 +92,7 @@ const Timer = () => {
                   e.target.value = e.target.value.slice(0, e.target.maxLength);
               }}
               type="number"
-              value={timeNumber}
+              value={initialCount}
               min={1}
               max={60}
               maxLength={2}
@@ -62,32 +111,31 @@ const Timer = () => {
           </ControlTimer>
         </TimerContainer>
       ) : (
-        <RemainContainer></RemainContainer>
+        // <RemainContainer>{Math.ceil(timeNumber / 60)}</RemainContainer>
+        <RemainContainer>
+          {timeNumber}
+          <span>second left</span>
+        </RemainContainer>
       )}
 
       <BottomContainer>
         {isStart ? (
-          <Button isStart={isStart} setIsStart={setIsStart} text="Start" />
+          <Button onClick={countStart} isStart={isStart}>
+            Start
+          </Button>
         ) : (
           <ButtonContent>
-            <Button
-              isStart={isStart}
-              setIsStart={setIsStart}
-              setTimeNumber={setTimeNumber}
-              text={<SvgStop fill={theme.color.thirdColor} width="40" height="40" />}
-            />
+            <Button onClick={countReset} isStart={isStart}>
+              <SvgStop fill={theme.color.thirdColor} width="50" height="50" />
+            </Button>
             {isPlay ? (
-              <Button
-                isStart={isStart}
-                setIsPlay={setIsPlay}
-                text={<SvgPause fill={theme.color.primaryColor} width="40" height="40" />}
-              />
+              <Button onClick={countPause} isStart={isStart}>
+                <SvgPause fill={theme.color.primaryColor} width="50" height="50" />
+              </Button>
             ) : (
-              <Button
-                isStart={isStart}
-                setIsPlay={setIsPlay}
-                text={<SvgPlay fill={theme.color.primaryColor} width="40" height="40" />}
-              />
+              <Button onClick={countResume} isStart={isStart}>
+                <SvgPlay fill={theme.color.primaryColor} width="50" height="50" />
+              </Button>
             )}
           </ButtonContent>
         )}
@@ -159,7 +207,16 @@ const RemainContainer = styled.section`
   height: 260px;
   margin-top: ${({ theme }) => theme.spacing.size.space9};
   margin-bottom: ${({ theme }) => theme.spacing.size.space16};
-  background-color: ${({ theme }) => theme.color.secondaryColor};
+  background-color: ${({ theme }) => theme.color.primaryColor};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ${({ theme }) => theme.size.text.XL7};
+  span {
+    margin-top: ${({ theme }) => theme.spacing.size.space14};
+    ${({ theme }) => theme.size.text.XL3};
+  }
 `;
 
 const BottomContainer = styled.footer``;
@@ -167,4 +224,21 @@ const ButtonContent = styled.section`
   display: flex;
   justify-content: space-between;
   width: 300px;
+`;
+
+const Button = styled.button<Styled>`
+  padding-left: ${({ theme }) => theme.spacing.size.space10};
+  padding-right: ${({ theme }) => theme.spacing.size.space10};
+  padding-top: ${({ theme, isStart }) => (isStart ? theme.spacing.size.space5 : theme.spacing.size.space2)};
+  padding-bottom: ${({ theme, isStart }) => (isStart ? theme.spacing.size.space5 : theme.spacing.size.space2)};
+
+  background-color: ${({ theme }) => theme.color.secondaryColor};
+  border-radius: ${({ theme }) => theme.size.radiusSize.rounded};
+  ${({ theme }) => theme.size.text.XL2}
+  color: ${({ theme }) => theme.color.primaryColor};
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.color.hoverColor};
+  }
 `;
