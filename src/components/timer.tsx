@@ -81,6 +81,12 @@ const Timer = () => {
     }
   }, [initialCount, timeNumber, timer]);
 
+  const displayTime = () => {
+    const minutes = Math.floor(timeNumber / 60);
+    const seconds = timeNumber % 60;
+    return `${minutes.toString().padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
+  };
+
   return (
     <>
       {isStart ? (
@@ -113,8 +119,8 @@ const Timer = () => {
       ) : (
         // <RemainContainer>{Math.ceil(timeNumber / 60)}</RemainContainer>
         <RemainContainer>
-          {timeNumber}
-          <span>second left</span>
+          {displayTime()}
+          <span>Remain Time</span>
         </RemainContainer>
       )}
 
@@ -177,13 +183,17 @@ const TimeInput = styled.input`
   width: 5rem;
   color: ${({ theme }) => theme.color.secondaryColor};
   ${({ theme }) => theme.size.text.XL7};
-
+  -moz-appearance: textfield;
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     margin: 0;
   }
   ::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     margin: 0;
   }
 `;
@@ -203,6 +213,10 @@ const ControllBtn = styled.button`
 `;
 
 const RemainContainer = styled.section`
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   width: 320px;
   height: 260px;
   margin-top: ${({ theme }) => theme.spacing.size.space9};
