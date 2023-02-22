@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+
 import styled from "styled-components";
 import SvgStop from "../assets/svgStop";
 import theme from "../styles/theme";
@@ -117,10 +119,24 @@ const Timer = () => {
           </ControlTimer>
         </TimerContainer>
       ) : (
-        // <RemainContainer>{Math.ceil(timeNumber / 60)}</RemainContainer>
         <RemainContainer>
-          {displayTime()}
-          <span>Remain Time</span>
+          <CountdownCircleTimer
+            isPlaying={isPlay ? true : false}
+            size={300}
+            strokeWidth={20}
+            initialRemainingTime={timeNumber}
+            duration={initialCount * 60}
+            trailColor={"#E5DDC8"}
+            rotation={"counterclockwise"}
+            colors={"#DB1F48"}
+          >
+            {() => (
+              <CountDownNumber>
+                {displayTime()}
+                <span>Remain Time</span>
+              </CountDownNumber>
+            )}
+          </CountdownCircleTimer>
         </RemainContainer>
       )}
 
@@ -217,19 +233,27 @@ const RemainContainer = styled.section`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  width: 320px;
-  height: 260px;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-top: ${({ theme }) => theme.spacing.size.space9};
   margin-bottom: ${({ theme }) => theme.spacing.size.space16};
   background-color: ${({ theme }) => theme.color.primaryColor};
+`;
+
+const CountDownNumber = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  ${({ theme }) => theme.size.text.XL7};
+  margin-top: ${({ theme }) => theme.spacing.size.space6};
+  ${({ theme }) => theme.size.text.XL6};
   span {
-    margin-top: ${({ theme }) => theme.spacing.size.space14};
-    ${({ theme }) => theme.size.text.XL3};
+    margin-top: ${({ theme }) => theme.spacing.size.space10};
+    ${({ theme }) => theme.size.text.XL2};
   }
 `;
 
