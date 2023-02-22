@@ -6,7 +6,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <Container>
-      <Title>1h Timer</Title>
+      <Title>1h Timers</Title>
       {children}
     </Container>
   );
