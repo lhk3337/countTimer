@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import SvgStop from "../assets/svgStop";
 import theme from "../styles/theme";
 import SvgPause from "../assets/svgPause";
@@ -36,8 +35,9 @@ const Timer = () => {
   const handleCount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     if (!isNaN(value)) {
-      setTimeNumber(value * 60);
-      setInitialCount(Math.min(Math.max(value, min), max));
+      const valueTime = Math.min(Math.max(value, min), max);
+      setTimeNumber(valueTime * 60);
+      setInitialCount(valueTime);
     }
   };
 
