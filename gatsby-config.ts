@@ -18,6 +18,7 @@ const config: GatsbyConfig = {
         icon: "src/assets/favicon.ico",
       },
     },
+    `gatsby-plugin-styled-components`,
   ],
 };
 

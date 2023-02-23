@@ -1,12 +1,17 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import theme from "../styles/theme";
+import GlobalStyle from "../styles/Global";
 interface Props {
   children: React.ReactNode;
 }
 const Layout = ({ children }: Props) => {
   return (
     <>
-      <Container>{children}</Container>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <Container>{children}</Container>
+      </ThemeProvider>
     </>
   );
 };
