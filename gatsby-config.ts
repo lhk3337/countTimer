@@ -18,6 +18,12 @@ const config: GatsbyConfig = {
         icon: "src/assets/favicon.ico",
       },
     },
+    {
+      resolve: `gatsby-plugin-google-adsense`,
+      options: {
+        publisherId: `ca-pub-6684846724407111`,
+      },
+    },
     `gatsby-plugin-styled-components`,
   ],
 };

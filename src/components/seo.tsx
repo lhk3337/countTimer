@@ -27,11 +27,6 @@ const Seo = () => {
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet" />
 
       <meta name="google-site-verification" content="hYSq-rVUAgPg6linjeNOHX4IjfbEuPaTOKxAw6tUJHE" />
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6684846724407111"
-        crossOrigin="anonymous"
-      ></script>
     </>
   );
 };
