@@ -90,8 +90,7 @@ const Timer = () => {
   };
 
   return (
-    <>
-      <Title>1h Timers</Title>
+    <Container>
       {isStart ? (
         <TimerContainer>
           <InputTimer>
@@ -162,16 +161,24 @@ const Timer = () => {
           </ButtonContent>
         )}
       </BottomContainer>
-    </>
+    </Container>
   );
 };
 
 export default Timer;
-const Title = styled.h1`
-  margin-top: ${({ theme }) => theme.spacing.size.space7};
-  margin-bottom: ${({ theme }) => theme.spacing.size.space10};
-  ${({ theme }) => theme.size.text.XL6}
-  font-weight: bold;
+const Container = styled.main`
+  ${({ theme }) => theme.spacing.margin.mxAuto}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  ${({ theme }) => theme.size.max.wsm};
+  padding: ${({ theme }) => theme.spacing.size.space9};
+  margin-top: 9%;
+  margin-bottom: 7%;
+  background-color: ${({ theme }) => theme.color.primaryColor};
+  color: ${({ theme }) => theme.color.secondaryColor};
+  border-radius: ${({ theme }) => theme.size.radiusSize.roundedXl};
 `;
 const TimerContainer = styled.section`
   position: relative;
@@ -238,8 +245,8 @@ const RemainContainer = styled.section`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  width: 250px;
-  height: 250px;
+  width: 282px;
+  height: 282px;
   display: flex;
   flex-direction: column;
   align-items: center;
