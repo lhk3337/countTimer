@@ -91,6 +91,7 @@ const Timer = () => {
 
   return (
     <>
+      <Title>1h Timers</Title>
       {isStart ? (
         <TimerContainer>
           <InputTimer>
@@ -139,7 +140,6 @@ const Timer = () => {
           </CountdownCircleTimer>
         </RemainContainer>
       )}
-
       <BottomContainer>
         {isStart ? (
           <Button onClick={countStart} isStart={isStart}>
@@ -167,7 +167,12 @@ const Timer = () => {
 };
 
 export default Timer;
-
+const Title = styled.h1`
+  margin-top: ${({ theme }) => theme.spacing.size.space7};
+  margin-bottom: ${({ theme }) => theme.spacing.size.space10};
+  ${({ theme }) => theme.size.text.XL6}
+  font-weight: bold;
+`;
 const TimerContainer = styled.section`
   position: relative;
   margin-top: ${({ theme }) => theme.spacing.size.space9};

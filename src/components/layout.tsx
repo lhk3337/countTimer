@@ -5,10 +5,9 @@ interface Props {
 }
 const Layout = ({ children }: Props) => {
   return (
-    <Container>
-      <Title>1h Timers</Title>
-      {children}
-    </Container>
+    <>
+      <Container>{children}</Container>
+    </>
   );
 };
 
@@ -24,12 +23,6 @@ const Container = styled.main`
   background-color: ${({ theme }) => theme.color.primaryColor};
   color: ${({ theme }) => theme.color.secondaryColor};
   border-radius: ${({ theme }) => theme.size.radiusSize.roundedXl};
-`;
-const Title = styled.h1`
-  margin-top: ${({ theme }) => theme.spacing.size.space7};
-  margin-bottom: ${({ theme }) => theme.spacing.size.space10};
-  ${({ theme }) => theme.size.text.XL6}
-  font-weight: bold;
 `;
 
 export default Layout;

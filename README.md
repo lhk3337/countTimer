@@ -4,11 +4,11 @@
 
 ## stack
 
-| name                | Description                                                                                                                   |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Framework & Library | <img src="https://img.shields.io/badge/react_js-61DAFB?style=for-the-badge&logo=react&logoColor=black" />                     |
-| Language            | <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />              |
-| CSS framework       | <img src="https://img.shields.io/badge/styled_components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white" /> |
+| name                | Description                                                                                                                                                                                                           |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework & Library | <img src="https://img.shields.io/badge/Gatsby.js-663399?style=for-the-badge&logo=Gatsby&logoColor=white" /> <img src="https://img.shields.io/badge/react_js-61DAFB?style=for-the-badge&logo=react&logoColor=black" /> |
+| Language            | <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />                                                                                                      |
+| CSS framework       | <img src="https://img.shields.io/badge/styled_components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white" />                                                                                         |
 
 ## Design
 
