@@ -8,6 +8,8 @@ import SvgPause from "../assets/svgPause";
 import SvgPlay from "../assets/svgPlay";
 import SvgUp from "../assets/svgUp";
 import SvgDown from "../assets/svgDown";
+import { Helmet } from "react-helmet";
+import Seo from "./seo";
 
 interface Styled {
   [key: string]: any;
@@ -91,6 +93,9 @@ const Timer = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>{displayTime()}</title>
+      </Helmet>
       {isStart ? (
         <TimerContainer>
           <InputTimer>
